@@ -1,30 +1,19 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import { Toaster } from './components/ui/sonner';
 
 function App() {
   return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">Sobre</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-
+    <>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
+      <Toaster />
+    </>
   );
 }
 

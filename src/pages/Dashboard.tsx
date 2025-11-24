@@ -1,10 +1,10 @@
 import Layout from '@/components/layouts/Layout';
 
-export default function About() {
+export default function Dashboard() {
   return (
     <Layout>
       <div>
-        <h1>Sobre Nós</h1>
+        <h1>Dashboard</h1>
       </div>
     </Layout>
   );
