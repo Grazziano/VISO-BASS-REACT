@@ -48,10 +48,17 @@ export default function About() {
           <p className="text-lg text-muted-foreground max-w-2xl">
             A VISO-BASS é uma aplicação desenvolvida para apoiar pesquisas e
             soluções baseadas na Social IoT, utilizando como base o modelo
-            estrutural VISO (Visualization of Social Objects). Seu objetivo é
-            oferecer uma forma simples, visual e eficiente de representar
-            objetos, classes, interações e relações sociais presentes em
-            ambientes inteligentes e conectados.
+            estrutural{' '}
+            <a
+              href="https://sol.sbc.org.br/index.php/semish/article/view/25072"
+              target="_blank"
+              className="text-primary underline hover:opacity-80 transition-opacity duration-300 ease-in-out"
+            >
+              VISO (Virtual Interactions between Social Objects)
+            </a>
+            . Seu objetivo é oferecer uma forma simples, visual e eficiente de
+            representar objetos, classes, interações e relações sociais
+            presentes em ambientes inteligentes e conectados.
             <br />
             <br />A plataforma permite explorar a estrutura da Social IoT por
             meio de uma interface intuitiva, onde cada elemento do ecossistema
