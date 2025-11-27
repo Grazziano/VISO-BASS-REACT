@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
 
 export default function Navigation() {
   const location = useLocation();
@@ -35,7 +36,11 @@ export default function Navigation() {
                 <Button
                   variant={isActive ? 'default' : 'ghost'}
                   size="sm"
-                  className="whitespace-nowrap"
+                  className={cn(
+                    'whitespace-nowrap',
+                    isActive &&
+                      'shadow-md bg-blue-500 text-white hover:bg-blue-600'
+                  )}
                 >
                   <Icon className="w-4 h-4 mr-2" />
                   {item.label}
