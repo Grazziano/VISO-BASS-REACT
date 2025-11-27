@@ -1,18 +1,21 @@
-import { Routes, Route } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard';
-import Objects from '../pages/Objects';
-import Classes from '../pages/Classes';
-import Interactions from '../pages/Interactions';
-import Environments from '../pages/Environments';
-import Friendships from '../pages/Friendships';
-import About from '../pages/About';
-import NotFound from '../pages/NotFound';
-import Login from '../pages/Login';
+import About from '@/pages/About';
+import Classes from '@/pages/Classes';
+import Dashboard from '@/pages/Dashboard';
+import Environments from '@/pages/Environments';
+import Friendships from '@/pages/Friendships';
+import Interactions from '@/pages/Interactions';
+import Login from '@/pages/Login';
+import NotFound from '@/pages/NotFound';
+import Objects from '@/pages/Objects';
+import Register from '@/pages/Register';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/objects" element={<Objects />} />
       <Route path="/classes" element={<Classes />} />

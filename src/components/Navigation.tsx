@@ -21,7 +21,7 @@ export default function Navigation() {
     { icon: ActivitySquare, label: 'Interações', path: '/interactions' },
     { icon: Globe2, label: 'Ambientes', path: '/environments' },
     { icon: Users, label: 'Relações', path: '/friendships' },
-    { icon: Info, label: 'About', path: '/about' },
+    { icon: Info, label: 'Sobre', path: '/about' },
   ];
 
   return (

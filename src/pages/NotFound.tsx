@@ -56,7 +56,7 @@ export default function NotFound() {
             <ArrowLeft className="w-4 h-4" />
             Voltar
           </Button>
-          <Link to="/">
+          <Link to="/login">
             <Button className="gap-2 w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white">
               <Home className="w-4 h-4" />
               Página Inicial
