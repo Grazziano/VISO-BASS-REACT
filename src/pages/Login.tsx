@@ -12,6 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Database, Lock, Mail } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { authService } from '@/services/authService';
+import { api } from '@/services/api';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -21,7 +23,39 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+
+    try {
+      setLoading(true);
+
+      const data = await authService.login({ email, password });
+
+      const token = data.access_token;
+
+      localStorage.setItem('token', token);
+
+      // adiciona token automaticamente nas próximas requisições
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      toast.success('Login realizado com sucesso!');
+      navigate('/dashboard');
+    } catch (error: unknown) {
+      console.error(error);
+
+      let errorMessage = 'Erro ao realizar login. Tente novamente mais tarde.';
+
+      if (error && typeof error === 'object' && 'response' in error) {
+        const apiError = error as {
+          response?: { data?: { message?: string } };
+        };
+        errorMessage = apiError.response?.data?.message || errorMessage;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
+    }
 
     // Simulated login
     setTimeout(() => {
