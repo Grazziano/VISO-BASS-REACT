@@ -9,20 +9,85 @@ import NotFound from '@/pages/NotFound';
 import Objects from '@/pages/Objects';
 import Register from '@/pages/Register';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import RequireAuth from './RequireAuth';
+import GuestOnly from './GuestOnly';
 
 export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/objects" element={<Objects />} />
-      <Route path="/classes" element={<Classes />} />
-      <Route path="/interactions" element={<Interactions />} />
-      <Route path="/environments" element={<Environments />} />
-      <Route path="/friendships" element={<Friendships />} />
-      <Route path="/about" element={<About />} />
+      <Route
+        path="/login"
+        element={
+          <GuestOnly>
+            <Login />
+          </GuestOnly>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <GuestOnly>
+            <Register />
+          </GuestOnly>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/objects"
+        element={
+          <RequireAuth>
+            <Objects />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/classes"
+        element={
+          <RequireAuth>
+            <Classes />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/interactions"
+        element={
+          <RequireAuth>
+            <Interactions />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/environments"
+        element={
+          <RequireAuth>
+            <Environments />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/friendships"
+        element={
+          <RequireAuth>
+            <Friendships />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <RequireAuth>
+            <About />
+          </RequireAuth>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

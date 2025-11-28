@@ -10,12 +10,16 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Database, Lock, Mail } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useAuth } from '@/context/useAuth';
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from =
+    (location.state as { from?: { pathname?: string } })?.from?.pathname ??
+    '/dashboard';
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,7 +32,7 @@ export default function Login() {
       setLoading(true);
       await login(email, password);
       toast.success('Login realizado com sucesso!');
-      navigate('/dashboard');
+      navigate(from);
     } catch (error: unknown) {
       let errorMessage = 'Erro ao realizar login. Tente novamente mais tarde.';
       if (error && typeof error === 'object' && 'response' in error) {
