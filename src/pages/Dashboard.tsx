@@ -1,6 +1,7 @@
+import Chart from '@/components/common/Chart';
 import CardStatus from '@/components/dashboard/CardStatus';
 import Layout from '@/components/layouts/Layout';
-import Title from '@/components/Title';
+import Title from '@/components/common/Title';
 import { ActivitySquare, Box, Globe2, Layers, Users } from 'lucide-react';
 
 export default function Dashboard() {
@@ -48,6 +49,18 @@ export default function Dashboard() {
         <Title title="Dashboard" subtitle="Visão geral do sistema VISO-BASS" />
 
         <CardStatus stats={stats} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Chart
+            title="Interações ao Longo do Tempo"
+            content="Gráfico de série temporal será exibido aqui"
+          />
+
+          <Chart
+            title="Distribuição por Classe"
+            content="Gráfico de distribuição será exibido aqui"
+          />
+        </div>
       </div>
     </Layout>
   );
