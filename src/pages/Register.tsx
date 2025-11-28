@@ -12,6 +12,8 @@ import { Label } from '@/components/ui/label';
 import { Database, Lock, Mail, User } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { authService } from '@/services/authService';
+import { AxiosError } from 'axios';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,18 +24,29 @@ export default function Register() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
-    // Simulated registration
-    setTimeout(() => {
-      if (name && email && password) {
+    try {
+      setLoading(true);
+      if (email && password && name) {
+        await authService.register({ name, email, password });
         toast.success('Conta criada com sucesso!');
         navigate('/login');
       } else {
         toast.error('Por favor, preencha todos os campos');
       }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        toast.error(
+          error.response?.data?.message || 'Erro ao registrar usuário'
+        );
+      } else if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error('Erro ao registrar usuário');
+      }
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   return (
