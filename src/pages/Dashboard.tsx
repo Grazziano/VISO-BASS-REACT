@@ -53,7 +53,7 @@ export default function Dashboard() {
     {
       icon: Box,
       label: 'Objetos',
-      value: formatNumberBR(objects),
+      value: formatNumberBR(objects, 0),
       loading: !objects,
       change: '+12%',
       color: 'text-blue-500',
@@ -61,7 +61,7 @@ export default function Dashboard() {
     {
       icon: Layers,
       label: 'Classes',
-      value: formatNumberBR(classes),
+      value: formatNumberBR(classes, 0),
       loading: !classes,
       change: '+5%',
       color: 'text-cyan-500',
@@ -69,7 +69,7 @@ export default function Dashboard() {
     {
       icon: ActivitySquare,
       label: 'Interações',
-      value: formatNumberBR(interactions),
+      value: formatNumberBR(interactions, 0),
       loading: !interactions,
       change: '+23%',
       color: 'text-indigo-500',
@@ -77,7 +77,7 @@ export default function Dashboard() {
     {
       icon: Globe2,
       label: 'Ambientes',
-      value: formatNumberBR(enviroments),
+      value: formatNumberBR(enviroments, 0),
       loading: !enviroments,
       change: '+3%',
       color: 'text-teal-500',
@@ -85,7 +85,7 @@ export default function Dashboard() {
     {
       icon: Users,
       label: 'Relações',
-      value: formatNumberBR(friendships),
+      value: formatNumberBR(friendships, 0),
       loading: !friendships,
       change: '+18%',
       color: 'text-sky-500',
