@@ -26,6 +26,10 @@ export default function Dashboard() {
   const [lastEnvironment, setLastEnvironment] = useState<IEnvironment>();
   const [lastFriendship, setLastFriendship] = useState<IFriendship>();
 
+  console.log(lastInteraction);
+  console.log(lastEnvironment);
+  console.log(lastFriendship);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
