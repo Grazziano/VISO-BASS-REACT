@@ -6,6 +6,12 @@ import Title from '@/components/common/Title';
 import Activities from '@/components/dashboard/Activities';
 import { ActivitySquare, Box, Globe2, Layers, Users } from 'lucide-react';
 import { api } from '@/services/api';
+import type { IObject } from '@/types/objects';
+import type { IClass } from '@/types/classes';
+import type { IInteraction } from '@/types/interaction';
+import type { IEnvironment } from '@/types/enrironment';
+import type { IFriendship } from '@/types/friendship';
+import { formatNumberBR } from '@/utils/format-number.util';
 
 export default function Dashboard() {
   const [objects, setObjects] = useState<number>(0);
@@ -13,6 +19,12 @@ export default function Dashboard() {
   const [interactions, setInteractions] = useState<number>(0);
   const [enviroments, setEnviroments] = useState<number>(0);
   const [friendships, setFriendships] = useState<number>(0);
+
+  const [lastObject, setLastObject] = useState<IObject>();
+  const [lastClass, setLastClass] = useState<IClass>();
+  const [lastInteraction, setLastInteraction] = useState<IInteraction>();
+  const [lastEnvironment, setLastEnvironment] = useState<IEnvironment>();
+  const [lastFriendship, setLastFriendship] = useState<IFriendship>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,8 +37,6 @@ export default function Dashboard() {
             api.get('/ona-environment/count'),
             api.get('/pagerank-friendship/count'),
           ]);
-
-        console.log(objectsRes);
 
         setObjects(objectsRes.data.total);
         setClasses(classesRes.data.total);
@@ -42,12 +52,30 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  function formatNumberBR(value: number, decimals: number = 2) {
-    return new Intl.NumberFormat('pt-BR', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    }).format(value);
-  }
+  useEffect(() => {
+    const fechActivities = async () => {
+      try {
+        const [objectRes, classRes, interactionRes, envRes, friendshipRes] =
+          await Promise.all([
+            api.get('/object/last'),
+            api.get('/class/last'),
+            api.get('/interaction/last'),
+            api.get('/ona-environment/last'),
+            api.get('/pagerank-friendship/last'),
+          ]);
+
+        setLastObject(objectRes.data);
+        setLastClass(classRes.data);
+        setLastInteraction(interactionRes.data);
+        setLastEnvironment(envRes.data);
+        setLastFriendship(friendshipRes.data);
+      } catch (error) {
+        console.log('Erro ao carregar atividades:', error);
+      }
+    };
+
+    fechActivities();
+  }, []);
 
   const stats = [
     {
@@ -96,7 +124,7 @@ export default function Dashboard() {
     {
       type: 'Objeto',
       action: 'criado',
-      name: 'Sensor de Temperatura #123',
+      name: lastObject?.obj_name ?? 'Objeto Desconhecido',
       time: '2 minutos atrás',
     },
     {
@@ -108,7 +136,7 @@ export default function Dashboard() {
     {
       type: 'Classe',
       action: 'atualizada',
-      name: 'Sensores Ambientais',
+      name: lastClass?.class_name ?? 'Classe Desconhecida',
       time: '10 minutos atrás',
     },
     {
