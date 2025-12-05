@@ -1,23 +1,22 @@
-import { Edit, Trash2 } from 'lucide-react';
+// import { Edit, Trash2 } from 'lucide-react';
 import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
+// import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 
 interface ClassItemProps {
   id: string;
   name: string;
-  objects: number;
-  description: string;
+  objects: string[];
+  class_function: string[];
 }
 
 export default function ClassCard({
-  id,
   name,
   objects,
-  description,
+  class_function,
 }: ClassItemProps) {
   return (
-    <Card key={id} className="hover:shadow-glow transition-shadow">
+    <Card className="hover:shadow-glow transition-shadow">
       <CardHeader>
         <div className="flex items-start justify-between">
           <CardTitle className="text-lg">{name}</CardTitle>
@@ -25,13 +24,18 @@ export default function ClassCard({
             variant="outline"
             className="px-2 py-1 bg-blue-100 text-blue-800"
           >
-            {objects} objetos
+            {objects.length} objetos
           </Badge>
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-muted-foreground mb-4">{description}</p>
-        <div className="flex gap-2">
+        <p className="text-lg text-muted-foreground mb-4">Funções:</p>
+        {class_function.map((func, index) => (
+          <p key={index} className="text-sm text-muted-foreground mb-4">
+            {func}
+          </p>
+        ))}
+        {/* <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -47,7 +51,7 @@ export default function ClassCard({
           >
             <Trash2 className="w-4 h-4" />
           </Button>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );
