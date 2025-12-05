@@ -19,7 +19,7 @@ Aplicação web para monitoramento de dados da API VISO BASS.
 1. Clone o repositório:
 ```bash
 git clone https://github.com/Grazziano/VISO-BASS-REACT.git
-cd viso-bass
+cd VISO-BASS-REACT
 ```
 
 2. Instale as dependências:
